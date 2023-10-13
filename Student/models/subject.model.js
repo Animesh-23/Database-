@@ -6,7 +6,8 @@ const subjectSchema = new mongoose.Schema({
   name: { type: String, required: true },
   subject_code: { type: String, required: true },
   teachers: [{ type: mongoose.ObjectId, ref: Teacher }],
-  class: [{ type: mongoose.ObjectId, ref: Class }],
+  classes: [{ type: mongoose.ObjectId, ref: Class }],
+  sub_type: { type: String, enum: ["Theory", "Practical"] },
 });
 
 const Subject = new mongoose.model("Subject", subjectSchema);
