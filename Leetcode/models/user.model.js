@@ -35,7 +35,43 @@ const userSchema = new mongoose.Schema({
       contest_rank: { type: Number },
     },
   ],
-  problems_solved: [{ type: mongoose.ObjectId, ref: Problem }],
+  problems_solved: [
+    {
+      problem: { type: mongoose.ObjectId, ref: Problem },
+      solutions: [
+        {
+          solution: String,
+          language: {
+            type: String,
+            enum: ["Java", "C++", "Python", "Go", "Rust", "Javascript"],
+          },
+          date: Date,
+          status: {
+            type: String,
+            enum: [
+              "Memory Limit Exceeded",
+              "Time Limit Exceeded",
+              "Wrong Answer",
+              "Accepted",
+            ],
+          },
+        },
+      ],
+    },
+  ],
+  discussion: [
+    {
+      post: { type: string },
+      user: { type: mongoose.ObjectId, ref: User },
+      votes: { user: { type: mongoose.ObjectId, ref: User } },
+      replies: [
+        {
+          comment: { type: String },
+          user: { type: mongoose.ObjectId, ref: User },
+        },
+      ],
+    },
+  ],
 });
 
 const User = new mongoose.model("User", userSchema);

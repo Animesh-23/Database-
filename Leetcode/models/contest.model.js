@@ -16,6 +16,7 @@ const contestSchema = new mongoose.Schema({
     },
   ],
   date: { type: Date, required: true },
+  staus: { type: String, enum: ["Ended", "Ongoing", "Comming Soon"] },
 });
 
 const Contest = new mongoose.model("Contest", contestSchema);

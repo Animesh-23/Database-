@@ -25,7 +25,11 @@ const problemSchema = new mongoose.Schema({
   submissions: [
     {
       code: { type: mongoose.Mixed, required: true },
-      user: { type: mongoose.ObjectId, ref: User },
+      language: {
+        type: String,
+        enum: ["Java", "C++", "Python", "Rust", "Golang"],
+      },
+      user: { type: mongoose.ObjectId, ref: User, required: true },
       accepted: Boolean,
     },
   ],
